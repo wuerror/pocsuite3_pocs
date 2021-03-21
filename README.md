@@ -1,5 +1,5 @@
 # http_request_smuggling_script
-http请求走私检测的脚本
+pocsuite3格式的http请求走私检测的脚本
 ## 原理与攻击面
 
 [协议层的攻击——HTTP请求走私](https://paper.seebug.org/1048/)

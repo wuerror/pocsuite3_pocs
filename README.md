@@ -1,0 +1,2 @@
+# http_request_smuggling_script
+http请求走私检测的脚本

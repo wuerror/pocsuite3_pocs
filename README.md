@@ -3,7 +3,9 @@ http请求走私检测的脚本
 ## 原理与攻击面
 
 [协议层的攻击——HTTP请求走私](https://paper.seebug.org/1048/)
+
 [一篇文章带你读懂http请求走私](http://blog.zeddyu.info/2019/12/05/HTTP-Smuggling/)
+
 seebug这篇中提到的几篇blackhat议题建议都看看
 ### 检测脚本的实现
 blackhat上提出的通过延时的方法，具体就不介绍了，上面提到的文章都有讲。

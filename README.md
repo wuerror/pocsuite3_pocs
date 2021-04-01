@@ -1,5 +1,9 @@
 # 一些pocsuite3的脚本
-目前只有一个。。。
+目前只有两个。。。
+## drupal7_geddon2
+针对7.x < 7.58版本的drupalgeddon2 exp，pocsuite3自带的poc是针对的8.x版本。阅读msf对应模块和已经公开的ruby版exp后写了这个，
+略去了判断版本的步骤，未对命令执行结果做清洗————待优化，也可能不想写了。
+verify、attack模式正常，shell模式还无法使用。
 ## http_request_smuggling_script
 pocsuite3格式的http请求走私检测的脚本
 ### 原理与攻击面

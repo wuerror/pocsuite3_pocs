@@ -1,5 +1,8 @@
 # 一些pocsuite3的脚本
-目前只有两个。。。
+目前只有3个。。。
+## shiziyuCMS_sqli
+纯练手，详情见佩奇Wiki。
+试了几个，能拿到表名，拿不到数据。也不能直接写文件getshell.我太菜了
 ## drupal7_geddon2
 针对7.x < 7.58版本的drupalgeddon2 exp，pocsuite3自带的poc是针对的8.x版本。阅读msf对应模块和已经公开的ruby版exp后写了这个，
 略去了判断版本的步骤，未对命令执行结果做清洗————待优化，也可能不想写了。

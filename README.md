@@ -1,5 +1,6 @@
 # 一些pocsuite3的脚本
-目前只有3个。。。
+## cve_2022_0540
+jira越权
 ## shiziyuCMS_sqli
 纯练手，详情见佩奇Wiki。
 试了几个，能拿到表名，拿不到数据。也不能直接写文件getshell.我太菜了

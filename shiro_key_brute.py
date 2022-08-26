@@ -111,7 +111,6 @@ class ShiroKey():
             'Cookie' : 'rememberMe=Yes'
             }
 
-    @classmethod
     def encrypt_AES_GCM(msg, secretKey):
         aesCipher = AES.new(secretKey, AES.MODE_GCM)
         ciphertext, authTag = aesCipher.encrypt_and_digest(msg)
@@ -141,7 +140,7 @@ class ShiroKey():
             if 'rememberMe=deleteMe;' not in res.headers.get("Set-Cookie"):
                 return key, "cbc"
         # GCM加密
-        encryptedMsg = ShiroKey.encrypt_AES_GCM(file_body, base64.b64decode(key))
+        encryptedMsg = self.encrypt_AES_GCM(file_body, base64.b64decode(key))
         base64_ciphertext = base64.b64encode(encryptedMsg[1] + encryptedMsg[0] + encryptedMsg[2])
         cookie = 'rememberMe={}'.format(base64_ciphertext.decode())
         self.head.update({'Cookie': cookie})

@@ -1,4 +1,12 @@
 # 一些pocsuite3的脚本
+
+## shiro_key_brute
+把[ShiroAttack2](https://github.com/SummerSec/ShiroAttack2)的检测和爆破key逻辑抠出来。用于**批量测试**shiro key是否可爆破。
+使用步骤：
+1.把shiro_keys.txt放入pocsuite3\data目录
+2.修改pocsuite3\lib\core\common.py set_paths()函数中添加`paths.SHIRO_KEYS = os.path.join(paths.POCSUITE_DATA_PATH, "shiro_keys.txt")`
+2.2或者直接修改poc中get_word_list()函数所打开的文件地址
+
 ## cve_2022_0540
 jira越权
 ## shiziyuCMS_sqli
